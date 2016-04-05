@@ -71,6 +71,12 @@ type Query struct {
 
 type PropertyMap map[string]interface{}
 
+type Groups struct {
+	ItemIDs         [][]string  `json:"itemIds"`
+	ExactMatches    [][]bool    `json:"exactMatches"`
+	RelevanceValues [][]float64 `json:"relevanceValues"`
+}
+
 type Results struct {
 	DatasetSize     int                               `json:"datasetSize"`
 	PageSize        int                               `json:"pageSize"`
@@ -83,4 +89,6 @@ type Results struct {
 	ItemIds         []string                          `json:"itemIds"`
 	Properties      []PropertyMap                     `json:"properties"`
 	IndexValues     map[string]map[string]interface{} `json:"indexValues"`
+	IsGrouped       bool                              `json:"isGrouped"`
+	Groups          *Groups                           `json:"groups,omitempty"`
 }
