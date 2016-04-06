@@ -19,3 +19,7 @@ func Float(value float64) *float64 {
 func PropertyNames(s PropertyNameList) *PropertyNameList {
 	return &s
 }
+
+func (s GeoJSON) Ptr() *GeoJSON {
+	return &s
+}
