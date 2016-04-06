@@ -15,7 +15,3 @@ func Bool(value bool) *bool {
 func Float(value float64) *float64 {
 	return &value
 }
-
-func PropertyNames(s PropertyNameList) *PropertyNameList {
-	return &s
-}

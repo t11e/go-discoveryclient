@@ -45,19 +45,19 @@ type Criterion struct {
 // http://docs.discoverysearchengine.com/release/4.0/query/query_api.html#sort-by-criterion
 type SortBy struct {
 	// Dimension is mandatory unless Builtin is provided
-	Dimension    string   `json:"dimension,omitempty"`
+	Dimension string `json:"dimension,omitempty"`
 	// Builtin should be exactMatch, relevance, id or random
-	Builtin      string   `json:"builtin,omitempty"`
+	Builtin string `json:"builtin,omitempty"`
 	// Order defaults to asc for everything other than
 	//    builtin exactMatch which defaults to desc (True > False)
 	//    builtin relevance which defaults to desc
-	Reverse      *bool    `json:"reverse,omitempty"`
+	Reverse *bool `json:"reverse,omitempty"`
 
 	// Only valid for geoloc dimensions
-	Latitude     *float64 `json:"latitude,omitempty"`
-	Longitude    *float64 `json:"longitude,omitempty"`
+	Latitude  *float64 `json:"latitude,omitempty"`
+	Longitude *float64 `json:"longitude,omitempty"`
 	// DistanceUnit should be miles or km
-	DistanceUnit string   `json:"distanceUnit,omitempty"`
+	DistanceUnit string `json:"distanceUnit,omitempty"`
 
 	// Only valid for builtin random
 	Seed         *float64 `json:"seed,omitempty"`
@@ -75,22 +75,20 @@ type IndexValue struct {
 	Dimension string `json:"dimension"`
 }
 
-type PropertyNameList []string
-
 type Query struct {
-	Criteria         []Criterion       `json:"criteria,omitempty"`
-	ExactMatchesOnly bool              `json:"exactMatchesOnly"`
-	PageSize         int               `json:"pageSize"`
-	Items            []string          `json:"items,omitempty"`
-	NotItems         []string          `json:"notItems,omitempty"`
-	ExactRelevance   *float64          `json:"exactRelevance,omitempty"`
-	StartIndex       int               `json:"startIndex"`
-	Values           []string          `json:"values,omitempty"`
-	Explain          string            `json:"explain,omitempty"`
-	IndexValues      []IndexValue      `json:"indexValues,omitempty"`
-	GroupBy          *GroupBy          `json:"groupBy,omitempty"`
-	Properties       *PropertyNameList `json:"properties,omitempty"`
-	SortBy           []SortBy          `json:"sortBy,omitempty"`
+	Criteria         []Criterion  `json:"criteria,omitempty"`
+	ExactMatchesOnly bool         `json:"exactMatchesOnly"`
+	PageSize         int          `json:"pageSize"`
+	Items            []string     `json:"items,omitempty"`
+	NotItems         []string     `json:"notItems,omitempty"`
+	ExactRelevance   *float64     `json:"exactRelevance,omitempty"`
+	StartIndex       int          `json:"startIndex"`
+	Values           []string     `json:"values,omitempty"`
+	Explain          string       `json:"explain,omitempty"`
+	IndexValues      []IndexValue `json:"indexValues,omitempty"`
+	GroupBy          *GroupBy     `json:"groupBy,omitempty"`
+	Properties       []string     `json:"properties"`
+	SortBy           []SortBy     `json:"sortBy,omitempty"`
 }
 
 type PropertyMap map[string]interface{}
