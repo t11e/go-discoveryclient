@@ -42,6 +42,29 @@ type Criterion struct {
 	Placemarks                     *GeoJSON    `json:"placemarks,omitempty"`
 }
 
+// http://docs.discoverysearchengine.com/release/4.0/query/query_api.html#sort-by-criterion
+type SortBy struct {
+	// Dimension is mandatory unless Builtin is provided
+	Dimension    string   `json:"dimension,omitempty"`
+	// Builtin should be exactMatch, relevance, id or random
+	Builtin      string   `json:"builtin,omitempty"`
+	// Order defaults to asc for everything other than
+	//    builtin exactMatch which defaults to desc (True > False)
+	//    builtin relevance which defaults to desc
+	Reverse      *bool    `json:"reverse,omitempty"`
+
+	// Only valid for geoloc dimensions
+	Latitude     *float64 `json:"latitude,omitempty"`
+	Longitude    *float64 `json:"longitude,omitempty"`
+	// DistanceUnit should be miles or km
+	DistanceUnit string   `json:"distanceUnit,omitempty"`
+
+	// Only valid for builtin random
+	Seed         *float64 `json:"seed,omitempty"`
+	MinRelevance *float64 `json:"minRelevance,omitempty"`
+	MaxRelevance *float64 `json:"maxRelevance,omitempty"`
+}
+
 type GroupBy struct {
 	Dimension string `json:"dimension"`
 	TopN      int    `json:"topN"`
@@ -67,6 +90,7 @@ type Query struct {
 	IndexValues      []IndexValue      `json:"indexValues,omitempty"`
 	GroupBy          *GroupBy          `json:"groupBy,omitempty"`
 	Properties       *PropertyNameList `json:"properties,omitempty"`
+	SortBy           []SortBy          `json:"sortBy,omitempty"`
 }
 
 type PropertyMap map[string]interface{}
