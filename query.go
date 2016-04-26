@@ -20,9 +20,9 @@ type Criterion struct {
 	Value                          interface{} `json:"value,omitempty"`
 	DidYouMean                     interface{} `json:"didYouMean,omitempty"`
 	Cull                           *bool       `json:"cull,omitempty"`
-	Min                            *float64    `json:"min,omitempty"`
+	Min                            interface{} `json:"min,omitempty"`
 	MinInclusive                   *bool       `json:"minInclusive,omitempty"`
-	Max                            *float64    `json:"max,omitempty"`
+	Max                            interface{} `json:"max,omitempty"`
 	MaxInclusive                   *bool       `json:"maxInclusive,omitempty"`
 	Latitude                       *float64    `json:"latitude,omitempty"`
 	Longitude                      *float64    `json:"longitude,omitempty"`
