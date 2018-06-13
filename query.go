@@ -6,7 +6,7 @@ type GeoJSON struct {
 }
 
 type Criterion struct {
-	Dimension                      string      `json:"dimension"`
+	Dimension                      string      `json:"dimension,omitempty"`
 	Id                             interface{} `json:"id,omitempty"`
 	NotId                          interface{} `json:"notId,omitempty"`
 	IsolatedId                     string      `json:"isolatedId,omitempty"`
