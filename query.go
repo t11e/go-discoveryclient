@@ -18,6 +18,7 @@ type Criterion struct {
 	IgnoreInverseDocumentFrequency *bool       `json:"ignoreInverseDocumentFrequency,omitempty"`
 	SearchStyle                    string      `json:"searchStyle,omitempty"`
 	Value                          interface{} `json:"value,omitempty"`
+	NotValue                       interface{} `json:"notValue,omitempty"`
 	DidYouMean                     interface{} `json:"didYouMean,omitempty"`
 	Cull                           *bool       `json:"cull,omitempty"`
 	Min                            interface{} `json:"min,omitempty"`
