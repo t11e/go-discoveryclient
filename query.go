@@ -97,6 +97,13 @@ type Query struct {
 	Properties       []string                  `json:"properties"`
 	SortBy           []SortBy                  `json:"sortBy,omitempty"`
 	Facets           map[string]FacetCriterion `json:"facets,omitempty"`
+	Highlighting     Highlighting              `json:"highlighting"`
+}
+
+type Highlighting struct {
+	Merge             *string  `json:"merge,omitempty"`
+	Template          []string `json:"template,omitempty"`
+	ExcludeDimensions []string `json:"excludeDimensions,omitempty"`
 }
 
 type FacetCriterion struct {
