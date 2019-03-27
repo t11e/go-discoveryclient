@@ -114,7 +114,7 @@ type FacetCriterion struct {
 	Dimension     *string          `json:"dimension,omitempty"`
 	DataIds       []string         `json:"dataIds,omitempty"`
 	IncludeBounds *bool            `json:"includeBounds,omitempty"`
-	IncludeLabels *bool            `json:"includeLabels,omitempty"`
+	IncludeLabel  *bool            `json:"includeLabel,omitempty"`
 	Navigable     *bool            `json:"navigable,omitempty"`
 	SortBy        *string          `json:"sortBy,omitempty"`
 	IsolatedID    *string          `json:"isolatedId,omitempty"`
