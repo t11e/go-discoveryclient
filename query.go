@@ -1,5 +1,11 @@
 package discoveryclient
 
+import (
+	"encoding/json"
+
+	"github.com/pkg/errors"
+)
+
 type GeoJSON struct {
 	Type        string      `json:"type"`
 	Coordinates interface{} `json:"coordinates"`
@@ -77,19 +83,37 @@ type IndexValue struct {
 }
 
 type Query struct {
-	Criteria         []Criterion  `json:"criteria,omitempty"`
-	ExactMatchesOnly bool         `json:"exactMatchesOnly"`
-	PageSize         int          `json:"pageSize"`
-	Items            []string     `json:"items,omitempty"`
-	NotItems         []string     `json:"notItems,omitempty"`
-	ExactRelevance   *float64     `json:"exactRelevance,omitempty"`
-	StartIndex       int          `json:"startIndex"`
-	Values           []string     `json:"values,omitempty"`
-	Explain          string       `json:"explain,omitempty"`
-	IndexValues      []IndexValue `json:"indexValues,omitempty"`
-	GroupBy          *GroupBy     `json:"groupBy,omitempty"`
-	Properties       []string     `json:"properties"`
-	SortBy           []SortBy     `json:"sortBy,omitempty"`
+	Criteria         []Criterion               `json:"criteria,omitempty"`
+	ExactMatchesOnly bool                      `json:"exactMatchesOnly"`
+	PageSize         int                       `json:"pageSize"`
+	Items            []string                  `json:"items,omitempty"`
+	NotItems         []string                  `json:"notItems,omitempty"`
+	ExactRelevance   *float64                  `json:"exactRelevance,omitempty"`
+	StartIndex       int                       `json:"startIndex"`
+	Values           []string                  `json:"values,omitempty"`
+	Explain          string                    `json:"explain,omitempty"`
+	IndexValues      []IndexValue              `json:"indexValues,omitempty"`
+	GroupBy          *GroupBy                  `json:"groupBy,omitempty"`
+	Properties       []string                  `json:"properties"`
+	SortBy           []SortBy                  `json:"sortBy,omitempty"`
+	Facets           map[string]FacetCriterion `json:"facets,omitempty"`
+}
+
+type FacetCriterion struct {
+	MinCount      *int             `json:"minCount,omitempty"`
+	TopN          *int             `json:"topN,omitempty"`
+	Dynamic       *json.RawMessage `json:"dynamic,omitempty"` // TODO
+	NavChildIDs   *string          `json:"navChildIds,omitempty"`
+	Dimension     *string          `json:"dimension,omitempty"`
+	DataIds       []string         `json:"dataIds,omitempty"`
+	IncludeBounds *bool            `json:"includeBounds,omitempty"`
+	IncludeLabels *bool            `json:"includeLabels,omitempty"`
+	Navigable     *bool            `json:"navigable,omitempty"`
+	SortBy        *string          `json:"sortBy,omitempty"`
+	IsolatedID    *string          `json:"isolatedId,omitempty"`
+	RootID        *string          `json:"rootId,omitempty"`
+	Depth         *int             `json:"depth,omitempty"`
+	CountType     *string          `json:"countType,omitempty"`
 }
 
 type PropertyMap map[string]interface{}
@@ -114,4 +138,29 @@ type Results struct {
 	IndexValues     map[string]map[string]interface{} `json:"indexValues"`
 	IsGrouped       bool                              `json:"isGrouped"`
 	Groups          *Groups                           `json:"groups,omitempty"`
+	Highlighting    []map[string]*HighlightingData    `json:"highlighting"`
+	Facets          *json.RawMessage                  `json:"facets"`
+}
+
+type HighlightingData struct {
+	Fragments []string
+}
+
+func (h *HighlightingData) UnmarshalJSON(b []byte) error {
+	if b[0] == '[' {
+		if err := json.Unmarshal(b, &h.Fragments); err != nil {
+			return errors.Wrap(err, "array of highlighting fragments expected")
+		}
+	} else {
+		var fragment string
+		if err := json.Unmarshal(b, &fragment); err != nil {
+			return errors.Wrap(err, "single highlighting fragment expected")
+		}
+		h.Fragments = []string{fragment}
+	}
+	return nil
+}
+
+func (h *HighlightingData) MarshalJSON() ([]byte, error) {
+	return json.Marshal(h.Fragments)
 }
