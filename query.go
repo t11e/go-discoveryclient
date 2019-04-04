@@ -94,10 +94,10 @@ type Query struct {
 	Explain          string                    `json:"explain,omitempty"`
 	IndexValues      []IndexValue              `json:"indexValues,omitempty"`
 	GroupBy          *GroupBy                  `json:"groupBy,omitempty"`
-	Properties       []string                  `json:"properties"`
+	Properties       []string                  `json:"properties,omitempty"`
 	SortBy           []SortBy                  `json:"sortBy,omitempty"`
 	Facets           map[string]FacetCriterion `json:"facets,omitempty"`
-	Highlighting     Highlighting              `json:"highlighting"`
+	Highlighting     Highlighting              `json:"highlighting,omitempty"`
 }
 
 type Highlighting struct {
