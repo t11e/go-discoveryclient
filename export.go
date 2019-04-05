@@ -7,3 +7,11 @@ type ExportQuery struct {
 	ExactMatchesOnly bool        `json:"exactMatchesOnly,omitempty"`
 	Values           []string    `json:"values,omitempty"`
 }
+
+type ExportItem struct {
+	ID     string
+	Score  float64
+	Exact  bool
+	Source []byte
+	Values []byte
+}
