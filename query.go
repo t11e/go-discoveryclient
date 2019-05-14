@@ -103,6 +103,7 @@ type Query struct {
 type Highlighting struct {
 	Merge             *string  `json:"merge,omitempty"`
 	Template          []string `json:"template,omitempty"`
+	IncludeDimensions []string `json:"includeDimensions,omitempty"`
 	ExcludeDimensions []string `json:"excludeDimensions,omitempty"`
 }
 
