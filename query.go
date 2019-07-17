@@ -137,13 +137,11 @@ type FacetCriterion struct {
 	CountType     *string          `json:"countType,omitempty"`
 }
 
-type Properties *json.RawMessage
-
 type Groups struct {
-	ItemIDs         [][]string     `json:"itemIds"`
-	ExactMatches    [][]bool       `json:"exactMatches"`
-	RelevanceValues [][]float64    `json:"relevanceValues"`
-	Properties      [][]Properties `json:"properties"`
+	ItemIDs         [][]string          `json:"itemIds"`
+	ExactMatches    [][]bool            `json:"exactMatches"`
+	RelevanceValues [][]float64         `json:"relevanceValues"`
+	Properties      [][]json.RawMessage `json:"properties"`
 }
 
 type Results struct {
@@ -156,7 +154,7 @@ type Results struct {
 	ExactMatches    []bool                            `json:"exactMatches"`
 	RelevanceValues []float64                         `json:"relevanceValues"`
 	ItemIds         []string                          `json:"itemIds"`
-	Properties      []Properties                      `json:"properties"`
+	Properties      []json.RawMessage                 `json:"properties"`
 	IndexValues     map[string]map[string]interface{} `json:"indexValues"`
 	IsGrouped       bool                              `json:"isGrouped"`
 	Groups          *Groups                           `json:"groups,omitempty"`
