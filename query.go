@@ -72,14 +72,18 @@ type SortBy struct {
 	MaxRelevance *float64 `json:"maxRelevance,omitempty"`
 }
 
-// GroupBy criterion. Note the lack of support for "legacyGroupBy", which would
-// alter the format of the group output. We only support the non-legacy one.
+// GroupBy criterion.
 type GroupBy struct {
 	Dimension  string   `json:"dimension"`
 	TopN       int      `json:"topN"`
 	Properties []string `json:"properties"`
 	Groups     []string `json:"groups"`
 	NotGroups  []string `json:"notGroups"`
+
+	// LegacyGroupBy must currently always be false, since we only support the
+	// non-legacy format. However, we need to include this field because the
+	// engine defaults to true here.
+	LegacyGroupBy bool `json:"legacyGroupBy"`
 
 	// TODO: Is this correct?
 	Highlighting *Highlighting `json:"highlighting"`
