@@ -110,7 +110,7 @@ type Query struct {
 	Properties       []string                  `json:"properties"`
 	SortBy           []SortBy                  `json:"sortBy,omitempty"`
 	Facets           map[string]FacetCriterion `json:"facets,omitempty"`
-	Highlighting     Highlighting              `json:"highlighting,omitempty"`
+	Highlighting     *Highlighting             `json:"highlighting"`
 }
 
 type Highlighting struct {
